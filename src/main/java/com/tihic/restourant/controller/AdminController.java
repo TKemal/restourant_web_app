@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.tihic.restourant.model.Category;
 import com.tihic.restourant.service.CategoryService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,5 +44,17 @@ public class AdminController {
     public String deleteCat(@PathVariable int id){
         categoryService.removeCategoryById(id);
         return "redirect:/admin/categories";
+    }
+    
+    @GetMapping("/admin/categories/update/{id}")
+    public String updateCat(@PathVariable int id, Model model){
+        Optional<Category> category = categoryService.getCategoryByID(id) ;
+        if (category.isPresent()) {
+            model.addAttribute("category", category.get());
+            return "categoriesAdd";
+        } else {
+            return "404";
+        }
+        
     }
 }
