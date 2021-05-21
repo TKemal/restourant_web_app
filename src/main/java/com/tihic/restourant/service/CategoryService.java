@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.tihic.restourant.model.Category;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -22,6 +23,10 @@ public class CategoryService {
     
     public void removeCategoryById(int id){
         categoryRepository.deleteById(id);
+    }
+    
+    public Optional<Category> getCategoryByID(int id){
+        return categoryRepository.findById(id);
     }
             
 }

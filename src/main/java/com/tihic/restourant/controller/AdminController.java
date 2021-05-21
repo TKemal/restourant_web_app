@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.tihic.restourant.model.Category;
 import com.tihic.restourant.service.CategoryService;
+import com.tihic.restourant.service.ProductService;
+import com.tihic.restourant.dto.ProductDTO;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +18,9 @@ public class AdminController {
     
     @Autowired
     CategoryService categoryService;
+    
+    @Autowired
+    ProductService productService;
     
     @GetMapping("/admin")
     public String adminHome(){
@@ -54,7 +59,20 @@ public class AdminController {
             return "categoriesAdd";
         } else {
             return "404";
-        }
-        
+        }  
+    }
+    
+    //Product section!
+    @GetMapping("/admin/products")
+    public String products(Model model){
+       model.addAttribute("products", productService.getAllProduct());
+        return "products";
+    }
+    
+    @GetMapping("/admin/products/add")
+    public String productAddGet(Model model){
+       model.addAttribute("productDTO", new ProductDTO());
+       model.addAttribute("categories", categoryService.getAllCategory());
+        return "productsAdd";
     }
 }
