@@ -42,5 +42,6 @@ public class HomeController {
         model.addAttribute("product", productService.getProductById(id).get());
         return "viewProduct";
     }
+    
 }
 
