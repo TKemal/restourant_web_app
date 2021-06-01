@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true)
-                .deleteCookies()
+                .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling()
                 .and()
@@ -68,10 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**", "static/**", "/images/**", "/productimages/**", "/css/**", "/js/**");
+        web.ignoring().antMatchers("/resources/**", "static/**", "/images/**", "/productImages/**", "/css/**", "/js/**");
     }
-    
-    
-    
     
 }

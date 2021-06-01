@@ -1,5 +1,6 @@
 package com.tihic.restourant.controller;
 
+import com.tihic.restourant.global.GlobalData;
 import com.tihic.restourant.model.Role;
 import com.tihic.restourant.repository.RoleRepository;
 import com.tihic.restourant.repository.UserRepository;
@@ -29,6 +30,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login() {
+        GlobalData.cart.clear();
         return "login";
     }
 
